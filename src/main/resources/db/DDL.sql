@@ -1,7 +1,7 @@
 -- DDL
 CREATE TABLE `user` (
                         `id` bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        `email` varchar(20) NOT NULL UNIQUE,
+                        `email` varchar(250) NOT NULL UNIQUE,
                         `password` varchar(120) NOT NULL,
                         `username` varchar(20) NOT NULL UNIQUE
 );
