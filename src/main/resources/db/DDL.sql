@@ -12,8 +12,8 @@ CREATE TABLE `role` (
 );
 
 CREATE TABLE `user_role` (
-                             `user_id` bigint,
-                             `role_id` bigint
+                             `user_id` bigint NOT NULL,
+                             `role_id` bigint NOT NULL
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `user_role` (`user_id`);
