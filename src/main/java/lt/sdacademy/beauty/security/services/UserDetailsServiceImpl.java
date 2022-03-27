@@ -1,6 +1,6 @@
 package lt.sdacademy.beauty.security.services;
 
-import lt.sdacademy.beauty.models.User;
+import lt.sdacademy.beauty.models.UserEntity;
 import lt.sdacademy.beauty.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User %s not found.", username)));
         return UserDetailsImpl.build(user);
     }

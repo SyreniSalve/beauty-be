@@ -1,7 +1,7 @@
 package lt.sdacademy.beauty.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lt.sdacademy.beauty.models.User;
+import lt.sdacademy.beauty.models.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private static final long serialVersionUid = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 
@@ -35,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(UserEntity user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole().name()))
                 .collect(Collectors.toList());

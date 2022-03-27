@@ -9,15 +9,11 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity(name = "refresh_token")
-public class RefreshToken {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class RefreshTokenEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    User user;
+    UserEntity user;
 
     @Column(nullable = false, unique = true)
     private String token;

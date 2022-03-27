@@ -2,9 +2,9 @@ package lt.sdacademy.beauty.controllers;
 
 
 import lombok.extern.slf4j.Slf4j;
-import lt.sdacademy.beauty.models.RefreshToken;
-import lt.sdacademy.beauty.models.Role;
-import lt.sdacademy.beauty.models.User;
+import lt.sdacademy.beauty.models.RefreshTokenEntity;
+import lt.sdacademy.beauty.models.RoleEntity;
+import lt.sdacademy.beauty.models.UserEntity;
 import lt.sdacademy.beauty.repositories.RoleRepository;
 import lt.sdacademy.beauty.repositories.UserRepository;
 import lt.sdacademy.beauty.security.jwt.JwtUtils;
@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lt.sdacademy.beauty.models.RoleEnums.ROLE_OWNER;
-import static lt.sdacademy.beauty.models.RoleEnums.ROLE_USER;
+import static lt.sdacademy.beauty.models.Role.ROLE_OWNER;
+import static lt.sdacademy.beauty.models.Role.ROLE_USER;
 
 @Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -73,7 +73,7 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+        RefreshTokenEntity refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
         return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail(), roles));
     }
@@ -83,7 +83,7 @@ public class AuthController {
         String requestRefreshToken = request.getRefreshToken();
         return refreshTokenService.findByToken(requestRefreshToken)
                 .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
+                .map(RefreshTokenEntity::getUser)
                 .map(user -> {
                     String token = jwtUtils.generateTokenFromUsername(user.getUsername());
                     return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
@@ -105,23 +105,23 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        User user = new User(signupRequest.getUsername(),
+        UserEntity user = new UserEntity(signupRequest.getUsername(),
                              signupRequest.getEmail(),
                              encoder.encode(signupRequest.getPassword()));
         Set<String> strRoles = signupRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        Set<RoleEntity> roles = new HashSet<>();
         if (strRoles == null || strRoles.size() == 0) {
-            Role userRole = roleRepository.findByRole(ROLE_USER)
+            RoleEntity userRole = roleRepository.findByRole(ROLE_USER)
                     .orElseThrow(() -> new RuntimeException(errorText));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 if ("owner".equals(role)) {
-                    Role ownerRole = roleRepository.findByRole(ROLE_OWNER)
+                    RoleEntity ownerRole = roleRepository.findByRole(ROLE_OWNER)
                             .orElseThrow(() -> new RuntimeException(errorText));
                     roles.add(ownerRole);
                 } else {
-                    Role userRole = roleRepository.findByRole(ROLE_USER)
+                    RoleEntity userRole = roleRepository.findByRole(ROLE_USER)
                             .orElseThrow(() -> new RuntimeException(errorText));
                     roles.add(userRole);
                 }

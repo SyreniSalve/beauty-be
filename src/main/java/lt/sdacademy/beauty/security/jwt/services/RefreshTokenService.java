@@ -1,6 +1,6 @@
 package lt.sdacademy.beauty.security.jwt.services;
 
-import lt.sdacademy.beauty.models.RefreshToken;
+import lt.sdacademy.beauty.models.RefreshTokenEntity;
 import lt.sdacademy.beauty.repositories.RefreshTokenRepository;
 import lt.sdacademy.beauty.repositories.UserRepository;
 import lt.sdacademy.beauty.security.jwt.exception.TokenRefreshException;
@@ -25,12 +25,12 @@ public class RefreshTokenService {
     @Autowired
     UserRepository userRepository;
 
-    public Optional<RefreshToken> findByToken(String token) {
+    public Optional<RefreshTokenEntity> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
 
-    public RefreshToken createRefreshToken(Long userId) {
-        RefreshToken refreshToken = new RefreshToken();
+    public RefreshTokenEntity createRefreshToken(Long userId) {
+        RefreshTokenEntity refreshToken = new RefreshTokenEntity();
         refreshToken.setUser(userRepository.findById(userId).get());
         refreshToken.setExpiryDate(Instant.now().minusMillis(refreshTokenDurationMs));
         refreshToken.setToken(UUID.randomUUID().toString());
@@ -38,7 +38,7 @@ public class RefreshTokenService {
         return refreshToken;
     }
 
-    public RefreshToken verifyExpiration(RefreshToken token) {
+    public RefreshTokenEntity verifyExpiration(RefreshTokenEntity token) {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(token);
             throw new TokenRefreshException(token.getToken(), "Refresh token was expired. Please make a new signin request");
