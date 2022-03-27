@@ -12,9 +12,9 @@ CREATE TABLE role (
 );
 
 CREATE TABLE `user_role` (
-                             `user_id` bigint NOT NULL ,
-                             `role_id` bigint NOT NULL,
-                             UNIQUE(user_id, role_id),
-                             FOREIGN KEY (`user_id`) REFERENCES user (`id`),
-                             FOREIGN KEY (`role_id`) REFERENCES role (`id`)
+    `user_id` bigint NOT NULL ,
+    `role_id` bigint NOT NULL,
+    UNIQUE(user_id, role_id),
+    FOREIGN KEY (`user_id`) REFERENCES user (`id`),
+    FOREIGN KEY (`role_id`) REFERENCES role (`id`)
 );
