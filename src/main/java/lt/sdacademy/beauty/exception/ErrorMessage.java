@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.jwt.exception;
+package lt.sdacademy.beauty.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

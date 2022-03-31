@@ -1,9 +1,9 @@
-package lt.sdacademy.beauty.security.jwt.services;
+package lt.sdacademy.beauty.services.refresh_token_service;
 
 import lt.sdacademy.beauty.models.RefreshTokenEntity;
 import lt.sdacademy.beauty.repositories.RefreshTokenRepository;
 import lt.sdacademy.beauty.repositories.UserRepository;
-import lt.sdacademy.beauty.security.jwt.exception.TokenRefreshException;
+import lt.sdacademy.beauty.exception.TokenRefreshException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.services;
+package lt.sdacademy.beauty.services.security_service;
 
 import lt.sdacademy.beauty.models.UserEntity;
 import lt.sdacademy.beauty.repositories.UserRepository;

@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.services;
+package lt.sdacademy.beauty.services.security_service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lt.sdacademy.beauty.models.UserEntity;

@@ -1,8 +1,6 @@
 package lt.sdacademy.beauty.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -14,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+//@AllArgsConstructor
 @Entity
 @Table (name = "user",
         uniqueConstraints = {
@@ -24,6 +23,18 @@ public class UserEntity extends AbstractEntity {
 
     @NotBlank
     @Size(max = 250)
+    private String username;
+//
+//    private String firstName;
+//
+//    private String lastName;
+//
+//    private String jobTitle;
+//
+//    private String phone;
+
+    @NotBlank
+    @Size(max = 250)
     @Email
     private String email;
 
@@ -31,15 +42,13 @@ public class UserEntity extends AbstractEntity {
     @Size(max = 120)
     private String password;
 
-    @NotBlank
-    @Size(max = 250)
-    private String username;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
+
+//    private String imageUrl;
 
     public UserEntity(String username, String email, String password) {
         this.username = username;
