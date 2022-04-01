@@ -2,12 +2,12 @@ package lt.sdacademy.beauty.service;
 
 import lombok.extern.slf4j.Slf4j;
 import lt.sdacademy.beauty.exception.TokenRefreshException;
-import lt.sdacademy.beauty.model.RefreshTokenEntity;
+import lt.sdacademy.beauty.model.entity.RefreshTokenEntity;
 import lt.sdacademy.beauty.security.jwt.JwtUtils;
-import lt.sdacademy.beauty.security.jwt.payload.request.LoginRequest;
-import lt.sdacademy.beauty.security.jwt.payload.request.TokenRefreshRequest;
-import lt.sdacademy.beauty.security.jwt.payload.response.JwtResponse;
-import lt.sdacademy.beauty.security.jwt.payload.response.TokenRefreshResponse;
+import lt.sdacademy.beauty.model.dto.request.LoginRequest;
+import lt.sdacademy.beauty.model.dto.request.TokenRefreshRequest;
+import lt.sdacademy.beauty.model.dto.response.JwtResponse;
+import lt.sdacademy.beauty.model.dto.response.TokenRefreshResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

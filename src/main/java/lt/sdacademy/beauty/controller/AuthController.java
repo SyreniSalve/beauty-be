@@ -1,11 +1,11 @@
 package lt.sdacademy.beauty.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import lt.sdacademy.beauty.model.UserEntity;
-import lt.sdacademy.beauty.security.jwt.payload.request.LoginRequest;
-import lt.sdacademy.beauty.security.jwt.payload.request.SignupRequest;
-import lt.sdacademy.beauty.security.jwt.payload.request.TokenRefreshRequest;
-import lt.sdacademy.beauty.security.jwt.payload.response.MessageResponse;
+import lt.sdacademy.beauty.model.entity.UserEntity;
+import lt.sdacademy.beauty.model.dto.request.LoginRequest;
+import lt.sdacademy.beauty.model.dto.request.SignupRequest;
+import lt.sdacademy.beauty.model.dto.request.TokenRefreshRequest;
+import lt.sdacademy.beauty.model.dto.response.MessageResponse;
 import lt.sdacademy.beauty.service.LoginService;
 import lt.sdacademy.beauty.service.RegistrationService;
 import lt.sdacademy.beauty.service.UserService;
@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Map;
 
 import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 
@@ -69,4 +70,13 @@ public class AuthController {
         return Files.readAllBytes(Paths.get("src/main/java/lt/sdacademy/beauty/server/image/" + fileName));
 
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<Map<String, Object>> findAllUsersByKeyword(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        return new ResponseEntity<>(userService.findAllByKeyword(keyword, page, size), HttpStatus.OK);
+    }
+
 }

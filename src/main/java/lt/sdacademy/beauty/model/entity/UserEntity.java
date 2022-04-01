@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.model;
+package lt.sdacademy.beauty.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

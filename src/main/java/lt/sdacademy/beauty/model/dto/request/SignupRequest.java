@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.jwt.payload.request;
+package lt.sdacademy.beauty.model.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

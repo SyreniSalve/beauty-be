@@ -1,11 +1,7 @@
 package lt.sdacademy.beauty.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.sdacademy.beauty.model.UserEntity;
-import lt.sdacademy.beauty.repository.UserRepository;
 import lt.sdacademy.beauty.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

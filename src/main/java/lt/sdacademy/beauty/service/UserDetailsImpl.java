@@ -1,7 +1,7 @@
 package lt.sdacademy.beauty.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.model.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

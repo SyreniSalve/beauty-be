@@ -1,7 +1,7 @@
 package lt.sdacademy.beauty.repository;
 
-import lt.sdacademy.beauty.model.RefreshTokenEntity;
-import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.model.entity.RefreshTokenEntity;
+import lt.sdacademy.beauty.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

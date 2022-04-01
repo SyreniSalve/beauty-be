@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.jwt.payload.response;
+package lt.sdacademy.beauty.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

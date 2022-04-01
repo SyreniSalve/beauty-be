@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.security.jwt.payload.request;
+package lt.sdacademy.beauty.model.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

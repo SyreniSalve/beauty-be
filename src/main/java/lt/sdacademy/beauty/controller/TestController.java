@@ -1,7 +1,7 @@
 package lt.sdacademy.beauty.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

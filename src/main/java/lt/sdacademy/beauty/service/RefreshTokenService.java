@@ -1,6 +1,6 @@
 package lt.sdacademy.beauty.service;
 
-import lt.sdacademy.beauty.model.RefreshTokenEntity;
+import lt.sdacademy.beauty.model.entity.RefreshTokenEntity;
 import lt.sdacademy.beauty.repository.RefreshTokenRepository;
 import lt.sdacademy.beauty.repository.UserRepository;
 import lt.sdacademy.beauty.exception.TokenRefreshException;

@@ -1,12 +1,12 @@
 package lt.sdacademy.beauty.service;
 
 import lombok.extern.slf4j.Slf4j;
-import lt.sdacademy.beauty.model.RoleEntity;
-import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.model.entity.RoleEntity;
+import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.repository.RoleRepository;
 import lt.sdacademy.beauty.repository.UserRepository;
-import lt.sdacademy.beauty.security.jwt.payload.request.SignupRequest;
-import lt.sdacademy.beauty.security.jwt.payload.response.MessageResponse;
+import lt.sdacademy.beauty.model.dto.request.SignupRequest;
+import lt.sdacademy.beauty.model.dto.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
-import static lt.sdacademy.beauty.model.Role.ROLE_OWNER;
-import static lt.sdacademy.beauty.model.Role.ROLE_USER;
+import static lt.sdacademy.beauty.model.entity.Role.ROLE_OWNER;
+import static lt.sdacademy.beauty.model.entity.Role.ROLE_USER;
 
 @Service
 @Transactional
