@@ -1,8 +1,8 @@
-package lt.sdacademy.beauty.services.refresh_token_service;
+package lt.sdacademy.beauty.service;
 
-import lt.sdacademy.beauty.models.RefreshTokenEntity;
-import lt.sdacademy.beauty.repositories.RefreshTokenRepository;
-import lt.sdacademy.beauty.repositories.UserRepository;
+import lt.sdacademy.beauty.model.RefreshTokenEntity;
+import lt.sdacademy.beauty.repository.RefreshTokenRepository;
+import lt.sdacademy.beauty.repository.UserRepository;
 import lt.sdacademy.beauty.exception.TokenRefreshException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

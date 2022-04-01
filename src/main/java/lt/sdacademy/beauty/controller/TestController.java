@@ -1,8 +1,8 @@
-package lt.sdacademy.beauty.controllers;
+package lt.sdacademy.beauty.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.sdacademy.beauty.models.UserEntity;
-import lt.sdacademy.beauty.services.entity_service.UserService;
+import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

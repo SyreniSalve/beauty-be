@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.models;
+package lt.sdacademy.beauty.model;
 
 public enum Role {
     ROLE_ADMIN,

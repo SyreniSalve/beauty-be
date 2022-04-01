@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.models;
+package lt.sdacademy.beauty.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

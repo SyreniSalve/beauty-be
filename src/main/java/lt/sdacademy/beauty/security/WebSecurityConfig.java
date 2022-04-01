@@ -2,7 +2,7 @@ package lt.sdacademy.beauty.security;
 
 import lt.sdacademy.beauty.security.jwt.AuthEntryPointJwt;
 import lt.sdacademy.beauty.security.jwt.AuthTokenFilter;
-import lt.sdacademy.beauty.services.security_service.UserDetailsServiceImpl;
+import lt.sdacademy.beauty.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package lt.sdacademy.beauty.services.security_service;
+package lt.sdacademy.beauty.service;
 
-import lt.sdacademy.beauty.models.UserEntity;
-import lt.sdacademy.beauty.repositories.UserRepository;
+import lt.sdacademy.beauty.model.UserEntity;
+import lt.sdacademy.beauty.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

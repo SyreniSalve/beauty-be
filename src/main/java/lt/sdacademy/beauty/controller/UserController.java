@@ -1,4 +1,4 @@
-package lt.sdacademy.beauty.controllers;
+package lt.sdacademy.beauty.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/test")
-public class AdminController {
+public class UserController {
 
-    @GetMapping("/admin")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String adminAccess() {
-        return "Admin Board";
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+    public String userAccess(){
+        return "User Content.";
     }
+
 }

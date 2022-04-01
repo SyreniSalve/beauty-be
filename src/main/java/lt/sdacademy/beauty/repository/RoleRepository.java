@@ -1,7 +1,7 @@
-package lt.sdacademy.beauty.repositories;
+package lt.sdacademy.beauty.repository;
 
-import lt.sdacademy.beauty.models.RoleEntity;
-import lt.sdacademy.beauty.models.Role;
+import lt.sdacademy.beauty.model.RoleEntity;
+import lt.sdacademy.beauty.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

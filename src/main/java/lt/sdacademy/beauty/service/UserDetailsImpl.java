@@ -1,11 +1,11 @@
-package lt.sdacademy.beauty.services.security_service;
+package lt.sdacademy.beauty.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lt.sdacademy.beauty.models.UserEntity;
+import lt.sdacademy.beauty.model.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -19,18 +19,44 @@ public class UserDetailsImpl implements UserDetails {
 
     private String username;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String jobTitle;
+
+    private String phone;
+
+    private LocalDate dateOfBirth;
+
     private String email;
+
+    private String city;
+
+    private String state;
+
+    private String imageUrl;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(Long id, String username, String firstName,
+                           String lastName, String jobTitle, String phone, LocalDate dateOfBirth,
+                           String email, String city, String state, String imageUrl, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.city = city;
+        this.state = state;
+        this.imageUrl = imageUrl;
         this.password = password;
         this.authorities = authorities;
     }
@@ -43,7 +69,15 @@ public class UserDetailsImpl implements UserDetails {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getJobTitle(),
+                user.getPhone(),
+                user.getDateOfBirth(),
                 user.getEmail(),
+                user.getCity(),
+                user.getState(),
+                user.getImageUrl(),
                 user.getPassword(),
                 authorities
         );
@@ -58,10 +92,6 @@ public class UserDetailsImpl implements UserDetails {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     @Override
     public String getPassword() {
         return password;
@@ -70,6 +100,42 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     @Override

@@ -1,9 +1,12 @@
-package lt.sdacademy.beauty.models;
+package lt.sdacademy.beauty.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.Instant;
 
 @Getter
