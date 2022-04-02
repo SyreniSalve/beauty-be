@@ -1,6 +1,6 @@
 package lt.sdacademy.beauty.security.jwt;
 
-import lt.sdacademy.beauty.security.services.UserDetailsServiceImpl;
+import lt.sdacademy.beauty.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package lt.sdacademy.beauty.security.jwt;
 
 import io.jsonwebtoken.*;
-import lt.sdacademy.beauty.security.services.UserDetailsImpl;
+import lt.sdacademy.beauty.service.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
