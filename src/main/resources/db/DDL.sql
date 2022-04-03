@@ -5,7 +5,7 @@ CREATE TABLE user
     `email`    varchar(250)       NOT NULL UNIQUE,
     `password` varchar(120)       NOT NULL,
     `username` varchar(50)        NOT NULL UNIQUE,
-    `date_of_birth` varchar(255) DEFAULT NULL,
+    `date_of_birth` date DEFAULT NULL,
     `first_name` varchar(250) DEFAULT NULL,
     `image_url` varchar(255) DEFAULT NULL,
     `job_title` varchar(120) NOT NULL,
