@@ -8,11 +8,10 @@ import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.awt.print.Pageable;
 import java.util.*;
 
 
@@ -23,6 +22,16 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    public Optional<UserEntity> findById(Long id) {
+       return Optional.ofNullable(this.userRepository.findById(id)
+               .orElseThrow(() -> new UsernameNotFoundException("User not found")));
+    }
+
+    public Optional<UserEntity> findByUsername(String username){
+        return Optional.ofNullable(this.userRepository.findByUsername(username))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 
     public List<UserEntity> findAllOwners(){
         try {
@@ -38,6 +47,27 @@ public class UserService {
             return ownersList;
         } catch (Exception e) {
             throw new RuntimeException("There are no owner in database.");
+        }
+    }
+
+    public Map<String, Object> findAllByKeyword(String keyword, int page, int size) {
+        try {
+            List<UserEntity> users;
+            Page<UserEntity> pages;
+            if (keyword == null) {
+                pages = userRepository.findAll(PageRequest.of(page, size));
+            } else {
+                pages = userRepository.findAll(keyword, PageRequest.of(page, size));
+            }
+            users = pages.getContent();
+            Map<String, Object> response = new HashMap<>();
+            response.put("users", users);
+            response.put("currentPage", pages.getNumber());
+            response.put("totalItems", pages.getTotalElements());
+            response.put("totalPages", pages.getTotalPages());
+            return response;
+        } catch (Exception e) {
+            throw new NullPointerException("Internal server error");
         }
     }
 
@@ -68,27 +98,4 @@ public class UserService {
                 .nextInt(4)]).toUriString();
     }
 
-    public Map<String, Object> findAllByKeyword(String keyword, int page, int size) {
-        try {
-            List<UserEntity> users = new ArrayList<>();
-//            Pageable paging = (Pageable) PageRequest.of(page, size);
-//            List<Employee> list = repo.findByDept("Sales", PageRequest.of(0, 5));
-
-            Page<UserEntity> pages;
-            if (keyword == null) {
-                pages = userRepository.findAll(PageRequest.of(page, size));
-            } else {
-                pages = userRepository.findAll(keyword, PageRequest.of(page, size));
-            }
-            users = pages.getContent();
-            Map<String, Object> response = new HashMap<>();
-            response.put("users", users);
-            response.put("currentPage", pages.getNumber());
-            response.put("totalItems", pages.getTotalElements());
-            response.put("totalPages", pages.getTotalPages());
-            return response;
-        } catch (Exception e) {
-            throw new NullPointerException("Internal server error");
-        }
-    }
 }

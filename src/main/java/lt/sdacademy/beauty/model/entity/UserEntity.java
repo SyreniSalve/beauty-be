@@ -40,6 +40,7 @@ public class UserEntity extends AbstractEntity {
     @Size(max = 250)
     private String lastName;
 
+    @NotBlank
     @Size(max = 120)
     @Column(name = "job_title")
     private String jobTitle;
@@ -84,7 +85,9 @@ public class UserEntity extends AbstractEntity {
        this.username = username;
        this.firstName = firstName;
        this.lastName = lastName;
-       this.jobTitle = jobTitle;
+       if (jobTitle == null) {
+           this.jobTitle = "user";
+       }
        this.phone = phone;
        this.email = email;
        this.dateOfBirth = dateOfBirth;
