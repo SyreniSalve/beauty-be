@@ -21,3 +21,4 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Page<UserEntity> findAll(String keyword, Pageable pageable);
 
 }
+//user repoitory find all by jobtitle listas, user entity
