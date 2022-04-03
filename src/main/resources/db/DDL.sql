@@ -8,7 +8,7 @@ CREATE TABLE user
     `date_of_birth` varchar(255) DEFAULT NULL,
     `first_name` varchar(250) DEFAULT NULL,
     `image_url` varchar(255) DEFAULT NULL,
-    `job_title` varchar(120) NOTNULL,
+    `job_title` varchar(120) NOT NULL,
     `last_name` varchar(250) DEFAULT NULL,
     `phone` varchar(12) DEFAULT NULL,
     `city` varchar(255) DEFAULT NULL,
