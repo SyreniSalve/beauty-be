@@ -4,7 +4,15 @@ CREATE TABLE user
     `id`       bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `email`    varchar(250)       NOT NULL UNIQUE,
     `password` varchar(120)       NOT NULL,
-    `username` varchar(50)        NOT NULL UNIQUE
+    `username` varchar(50)        NOT NULL UNIQUE,
+    `date_of_birth` date DEFAULT NULL,
+    `first_name` varchar(250) DEFAULT NULL,
+    `image_url` varchar(255) DEFAULT NULL,
+    `job_title` varchar(120) NOT NULL,
+    `last_name` varchar(250) DEFAULT NULL,
+    `phone` varchar(12) DEFAULT NULL,
+    `city` varchar(255) DEFAULT NULL,
+    `state` varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE role
