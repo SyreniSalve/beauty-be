@@ -30,7 +30,7 @@ public class UserDto {
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "yyyy-dd-MM")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotBlank

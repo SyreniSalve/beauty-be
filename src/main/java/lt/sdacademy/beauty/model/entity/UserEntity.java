@@ -57,7 +57,7 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "date_of_birth")
     @JsonSerialize(using = LocalDateSerializer.class)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "MM-dd-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotBlank
