@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.*;
 
 
@@ -102,12 +101,6 @@ public class UserService {
     public void deleteUser(Long id) {
         log.info("Delete user with id: {}", id);
         userRepository.deleteById(id);
-    }
-
-    public String setUserImageUrl() {
-        String[] imagesNames = {"user.png", "user(2).png", "user(3).png", "user(4).png"};
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/auth/image/" + imagesNames[new Random()
-                .nextInt(4)]).toUriString();
     }
 
 }
