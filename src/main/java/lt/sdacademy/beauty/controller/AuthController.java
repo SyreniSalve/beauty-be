@@ -2,6 +2,8 @@ package lt.sdacademy.beauty.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.extern.slf4j.Slf4j;
+import lt.sdacademy.beauty.model.dto.AdminDto;
+import lt.sdacademy.beauty.model.dto.UserDto;
 import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.model.dto.request.LoginRequest;
 import lt.sdacademy.beauty.model.dto.request.SignupRequest;
@@ -10,6 +12,7 @@ import lt.sdacademy.beauty.model.dto.response.MessageResponse;
 import lt.sdacademy.beauty.service.LoginService;
 import lt.sdacademy.beauty.service.RegistrationService;
 import lt.sdacademy.beauty.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +35,17 @@ import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 public class AuthController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    RegistrationService registrationService;
+    private RegistrationService registrationService;
 
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -56,7 +63,7 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @GetMapping("/find_by_id/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable("id") Long id){
         Optional<UserEntity> user = userService.findById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -90,9 +97,20 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update_user")
-    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user) {
-        UserEntity updatedUser = this.userService.updateUser(user);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    @PutMapping("/update_user/{id}")
+    public ResponseEntity<UserDto> userUpdateForUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+        UserEntity userRequest = modelMapper.map(userDto, UserEntity.class);
+        UserEntity user = userService.updateUser(id, userRequest);
+        UserDto postResponse = modelMapper.map(user, UserDto.class);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+
+    @PutMapping("/admin_update/{id}")
+    public ResponseEntity<AdminDto> userUpdateForAdmin(@PathVariable("id") Long id, @RequestBody AdminDto adminDto) {
+        UserEntity userRequest = modelMapper.map(adminDto, UserEntity.class);
+        UserEntity user = userService.adminUpdate(id, userRequest);
+        AdminDto postResponse = modelMapper.map(user, AdminDto.class);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 }

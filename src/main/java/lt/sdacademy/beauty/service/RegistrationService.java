@@ -64,9 +64,6 @@ public class RegistrationService {
                 signupRequest.getImageUrl());
         Set<String> strRoles = signupRequest.getRole();
         Set<RoleEntity> roles = new HashSet<>();
-        if (user.getImageUrl() == null) {
-            user.setImageUrl(userService.setUserImageUrl());
-        }
         if (strRoles == null || strRoles.size() == 0) {
             RoleEntity userRole = roleRepository.findByRole(ROLE_USER)
                     .orElseThrow(() -> new RuntimeException(errorText));
