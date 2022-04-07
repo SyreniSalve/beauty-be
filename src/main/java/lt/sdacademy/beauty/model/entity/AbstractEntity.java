@@ -1,6 +1,5 @@
 package lt.sdacademy.beauty.model.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +33,5 @@ public abstract class AbstractEntity {
         }
         return getId().equals(((AbstractEntity) obj).getId());
     }
+
 }

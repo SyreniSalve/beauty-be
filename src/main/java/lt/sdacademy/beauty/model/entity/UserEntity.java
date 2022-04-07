@@ -6,14 +6,19 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 
 @Getter
 @Setter
@@ -79,15 +84,17 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<RefreshTokenEntity> refreshTokens = new ArrayList<>();
+
     public UserEntity(String username, String firstName, String lastName,
                       String jobTitle, String phone, LocalDate dateOfBirth,
                       String email, String password, String city, String state, String imageUrl) {
        this.username = username;
        this.firstName = firstName;
        this.lastName = lastName;
-       if (jobTitle == null) {
-           this.jobTitle = "user";
-       }
+       this.jobTitle = jobTitle == null ? "user" : jobTitle;
        this.phone = phone;
        this.email = email;
        this.dateOfBirth = dateOfBirth;

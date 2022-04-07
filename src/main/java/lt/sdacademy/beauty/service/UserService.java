@@ -1,11 +1,11 @@
 package lt.sdacademy.beauty.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.sdacademy.beauty.model.entity.Role;
 import lt.sdacademy.beauty.model.entity.RoleEntity;
 import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,13 +15,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.*;
 
 
-@RequiredArgsConstructor
 @Service
 @Transactional
 @Slf4j
 public class UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     public Optional<UserEntity> findById(Long id) {
        return Optional.ofNullable(this.userRepository.findById(id)
@@ -71,17 +72,49 @@ public class UserService {
         }
     }
 
-    public UserEntity updateUser(UserEntity user) {
+    public UserEntity adminUpdate(Long id, UserEntity userRequest){
         try {
-            log.info("Updating user: {}", user.getUsername());
-            if (user.getImageUrl() == null) {
-                user.setImageUrl(setUserImageUrl());
-            }
-            return userRepository.save(user);
+            UserEntity user = this.userRepository.findUserEntitiesById(id);
+            user.setUsername(user.getUsername());
+            user.setFirstName(user.getFirstName());
+            user.setLastName(user.getLastName());
+            user.setJobTitle(userRequest.getJobTitle());
+            user.setPhone(user.getPhone());
+            user.setEmail(user.getEmail());
+            user.setCity(user.getCity());
+            user.setState(user.getState());
+            user.setImageUrl(user.getImageUrl());
+            Set<RoleEntity> roles = user.getRoles();
+            user.setRoles(userRequest.getRoles());
+            roles.forEach(role -> {
+                user.getRoles().add(role);
+            });
+            return this.userRepository.save(user);
         } catch (Exception e) {
-            throw new RuntimeException("User not updated.");
+            throw new RuntimeException("User not found.");
         }
     }
+
+    public UserEntity updateUser(Long id, UserEntity userRequest) {
+        try{
+            UserEntity user = this.userRepository.findUserEntitiesById(id);
+            user.setFirstName(userRequest.getFirstName());
+            user.setLastName(userRequest.getLastName());
+            user.setJobTitle(userRequest.getJobTitle());
+            user.setPhone(userRequest.getPhone());
+            user.setDateOfBirth(userRequest.getDateOfBirth());
+            user.setEmail(userRequest.getEmail());
+            user.setCity(userRequest.getCity());
+            user.setState(userRequest.getState());
+            user.setImageUrl(userRequest.getImageUrl());
+            user.setRoles(user.getRoles());
+
+            return this.userRepository.save(user);
+        } catch (Exception e) {
+        throw new RuntimeException("User not found.");
+        }
+    }
+
 
     public void deleteUser(Long id) {
         log.info("Delete user with id: {}", id);
@@ -99,3 +132,5 @@ public class UserService {
     }
 
 }
+
+

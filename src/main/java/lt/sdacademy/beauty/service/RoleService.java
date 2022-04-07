@@ -1,9 +1,8 @@
 package lt.sdacademy.beauty.service;
 
 import lombok.extern.slf4j.Slf4j;
-import lt.sdacademy.beauty.model.entity.Role;
-import lt.sdacademy.beauty.model.entity.RoleEntity;
 import lt.sdacademy.beauty.repository.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class RoleService {
 
+    @Autowired
     private RoleRepository roleRepository;
 
-//    public RoleEntity addNewRole(Role role) {
-//
-//    }
+
 }
