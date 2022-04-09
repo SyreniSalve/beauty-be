@@ -97,6 +97,15 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
+//    public UserEntity deleteUserRole(Long roleId, UserEntity user) {
+//        UserEntity foundUser = this.userRepository.findUserEntitiesById(user.getId());
+//        foundUser.getRoles().forEach(role -> {
+//            if (Objects.equals(role.getId(), roleId)) {
+//                user.getRoles().remove(role);
+//            }
+//        });
+//    }
+
 
     public void deleteUser(Long id) {
         log.info("Delete user with id: {}", id);

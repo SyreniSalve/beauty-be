@@ -75,6 +75,12 @@ public class UserEntity extends AbstractEntity {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_event",
+               joinColumns = @JoinColumn(name = "user_id"),
+               inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<EventEntity> events = new ArrayList<>();
+
     @NotBlank
     private String city;
 

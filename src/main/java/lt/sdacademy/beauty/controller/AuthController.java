@@ -87,9 +87,14 @@ public class AuthController {
     public ResponseEntity<Map<String, Object>> findAllUsersByKeyword(
             @RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size) {
+            @RequestParam(defaultValue = "4") int size) {
         return new ResponseEntity<>(userService.findAllByKeyword(keyword, page, size), HttpStatus.OK);
     }
+//    @GetMapping("/delete_role/{id}")
+//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
+//       this.userService.deleteUserRole(roleId, user);
+//       return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @DeleteMapping("/delete_user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
