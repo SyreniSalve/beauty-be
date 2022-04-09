@@ -30,7 +30,6 @@ public class EventEntityController {
     }
 
     @PostMapping("/events/create")
-    @JsonSerialize(using = LocalDateSerializer.class)
     @Transactional
     ResponseEntity<EventEntity> createEvent(@RequestBody EventCreateParams params) {
         EventEntity event = new EventEntity();
