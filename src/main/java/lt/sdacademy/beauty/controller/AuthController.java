@@ -87,7 +87,7 @@ public class AuthController {
     public ResponseEntity<Map<String, Object>> findAllUsersByKeyword(
             @RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size) {
+            @RequestParam(defaultValue = "5") int size) {
         return new ResponseEntity<>(userService.findAllByKeyword(keyword, page, size), HttpStatus.OK);
     }
 
