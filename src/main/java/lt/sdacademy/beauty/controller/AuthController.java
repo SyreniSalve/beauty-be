@@ -95,12 +95,6 @@ public class AuthController {
         return new ResponseEntity<>(userService.findAllByKeyword(keyword, page, size), HttpStatus.OK);
     }
 
-    //    @GetMapping("/delete_role/{id}")
-//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
-//       this.userService.deleteUserRole(roleId, user);
-//       return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     @PostMapping("/add-event/user/{userId}")
     public ResponseEntity<EventEntityDto> createEvent(@PathVariable("userId")  Long userId,
                                                    @RequestBody EventEntityDto eventParams) {
@@ -134,4 +128,10 @@ public class AuthController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    @GetMapping("/delete_role/{id}")
+//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
+//        this.userService.deleteUserRole(roleId, user);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
