@@ -75,10 +75,8 @@ public class UserEntity extends AbstractEntity {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_event",
-               joinColumns = @JoinColumn(name = "user_id"),
-               inverseJoinColumns = @JoinColumn(name = "event_id"))
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
     private List<EventEntity> events = new ArrayList<>();
 
     @NotBlank

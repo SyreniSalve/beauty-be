@@ -1,9 +1,11 @@
 package lt.sdacademy.beauty.service;
 
 import lombok.extern.slf4j.Slf4j;
+import lt.sdacademy.beauty.model.entity.EventEntity;
 import lt.sdacademy.beauty.model.entity.Role;
 import lt.sdacademy.beauty.model.entity.RoleEntity;
 import lt.sdacademy.beauty.model.entity.UserEntity;
+import lt.sdacademy.beauty.repository.EventEntityRepository;
 import lt.sdacademy.beauty.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EventEntityRepository eventEntityRepository;
 
 
     public Optional<UserEntity> findById(Long id) {
@@ -106,6 +111,12 @@ public class UserService {
 //        });
 //    }
 
+    public UserEntity addEvent(Long userId, EventEntity event) {
+        UserEntity user = this.userRepository.findUserEntitiesById(userId);
+        EventEntity newEvent = this.eventEntityRepository.save(event);
+        user.getEvents().add(newEvent);
+        return user;
+    }
 
     public void deleteUser(Long id) {
         log.info("Delete user with id: {}", id);
