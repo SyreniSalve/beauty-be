@@ -11,11 +11,11 @@ public class EventEntityDto {
     private String title;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
 
     private String location;

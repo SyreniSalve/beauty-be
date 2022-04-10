@@ -17,10 +17,8 @@ import java.time.LocalDateTime;
 @Table(name = "event")
 public class EventEntity extends AbstractEntity {
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @Column(name = "user_id")
+    private Long userId;
 
     private String title;
 

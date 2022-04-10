@@ -75,8 +75,9 @@ public class UserEntity extends AbstractEntity {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
-    @OneToMany (fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
-    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(insertable = false, updatable = false, name = "user_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<EventEntity> events = new ArrayList<>();
 
     @NotBlank

@@ -3,10 +3,13 @@ package lt.sdacademy.beauty.controller;
 import lt.sdacademy.beauty.model.dto.*;
 import lt.sdacademy.beauty.model.entity.EventEntity;
 import lt.sdacademy.beauty.service.EventService;
+import lt.sdacademy.beauty.service.UserDetailsImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,9 +40,11 @@ public class EventController {
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     @PostMapping("/events/create")
     public ResponseEntity<EventCreateParams> createEvent(@RequestBody EventCreateParams params) {
         EventEntity userRequest = modelMapper.map(params, EventEntity.class);
+        userRequest.setUserId(((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         EventEntity user = eventService.createEvent(userRequest);
         EventCreateParams postResponse = modelMapper.map(user, EventCreateParams.class);
         return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
