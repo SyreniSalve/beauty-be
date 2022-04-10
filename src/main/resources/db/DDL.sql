@@ -23,9 +23,9 @@ CREATE TABLE event
     `end_time` timestamp          NULL,
     `location` varchar(255)       NULL,
     `color` varchar(120)          NULL,
-    `groupId` bigint              NULL,
+    `group_id` bigint              NULL,
     `user_id` bigint             NULL,
-    FOREIGN KEY (`user_id`) REFERENCES user (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES user (`id`)
 );
 
 CREATE TABLE role
