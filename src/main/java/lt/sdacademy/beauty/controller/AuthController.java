@@ -2,13 +2,14 @@ package lt.sdacademy.beauty.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.extern.slf4j.Slf4j;
-import lt.sdacademy.beauty.model.dto.AdminDto;
-import lt.sdacademy.beauty.model.dto.UserDto;
+import lt.sdacademy.beauty.model.dto.*;
+import lt.sdacademy.beauty.model.entity.EventEntity;
 import lt.sdacademy.beauty.model.entity.UserEntity;
 import lt.sdacademy.beauty.model.dto.request.LoginRequest;
 import lt.sdacademy.beauty.model.dto.request.SignupRequest;
 import lt.sdacademy.beauty.model.dto.request.TokenRefreshRequest;
 import lt.sdacademy.beauty.model.dto.response.MessageResponse;
+import lt.sdacademy.beauty.service.EventService;
 import lt.sdacademy.beauty.service.LoginService;
 import lt.sdacademy.beauty.service.RegistrationService;
 import lt.sdacademy.beauty.service.UserService;
@@ -44,6 +45,9 @@ public class AuthController {
     private LoginService loginService;
 
     @Autowired
+    private EventService eventService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
 
@@ -64,7 +68,7 @@ public class AuthController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable("id") Long id){
+    public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable("id") Long id) {
         Optional<UserEntity> user = userService.findById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -82,20 +86,25 @@ public class AuthController {
     }
 
     @GetMapping("/users")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @JsonInclude()
     public ResponseEntity<Map<String, Object>> findAllUsersByKeyword(
             @RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size) {
+            @RequestParam(defaultValue = "4") int size) {
         return new ResponseEntity<>(userService.findAllByKeyword(keyword, page, size), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete_user/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/add-event/user/{userId}")
+    public ResponseEntity<EventEntityDto> createEvent(@PathVariable("userId")  Long userId,
+                                                   @RequestBody EventEntityDto eventParams) {
+        EventEntity userRequest = modelMapper.map(eventParams, EventEntity.class);
+        EventEntity userEvent = eventService.createEvent(userRequest);
+        this.userService.addEvent(userId, userEvent);
+        EventEntityDto postResponse = modelMapper.map(userEvent, EventEntityDto.class);
+        return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/update_user/{id}")
     public ResponseEntity<UserDto> userUpdateForUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
@@ -113,4 +122,16 @@ public class AuthController {
         AdminDto postResponse = modelMapper.map(user, AdminDto.class);
         return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete_user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @GetMapping("/delete_role/{id}")
+//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
+//        this.userService.deleteUserRole(roleId, user);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
