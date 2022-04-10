@@ -21,10 +21,11 @@ CREATE TABLE event
     `title`    varchar(250)       NULL,
     `start_time` timestamp        NULL,
     `end_time` timestamp          NULL,
-    `start_time_zone` varchar(255)NULL,
-    `end_time_zone` varchar(255)  NULL,
     `location` varchar(255)       NULL,
     `color` varchar(120)          NULL,
+    `groupId` bigint              NULL,
+    `user_id` bigint             NULL,
+    FOREIGN KEY (`user_id`) REFERENCES user (`id`),
 );
 
 CREATE TABLE role
@@ -40,15 +41,6 @@ CREATE TABLE `user_role`
     UNIQUE (user_id, role_id),
     FOREIGN KEY (`user_id`) REFERENCES user (`id`),
     FOREIGN KEY (`role_id`) REFERENCES role (`id`)
-);
-
-CREATE TABLE `user_event`
-(
-    `user_id` bigint NOT NULL,
-    `event_id` bigint NOT NULL,
-    UNIQUE (user_id, event_id),
-    FOREIGN KEY (`user_id`) REFERENCES user (`id`),
-    FOREIGN KEY (`event_id`) REFERENCES event (`id`)
 );
 
 CREATE TABLE `refresh_token`
