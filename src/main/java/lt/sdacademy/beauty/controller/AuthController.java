@@ -129,9 +129,11 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/delete_role/{id}")
-//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
-//        this.userService.deleteUserRole(roleId, user);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @DeleteMapping("/delete_role/{role_id}/{user_id}")
+    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("role_id") Long roleId,
+                                                     @PathVariable("user_id") Long userId) {
+        this.userService.deleteUserRole(roleId, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
