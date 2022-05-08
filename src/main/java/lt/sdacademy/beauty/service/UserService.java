@@ -37,18 +37,23 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
-    public List<UserEntity> findAllOwners(){
-        List<UserEntity> usersList = this.userRepository.findAll();
-        List<UserEntity> ownersList = new ArrayList<>();
-        for (UserEntity user : usersList) {
-            for (RoleEntity role : user.getRoles()) {
-                if (role.getRole().equals(Role.ROLE_OWNER)) {
-                    ownersList.add(user);
-                }
-            }
+    public Map<String, Object> findAllByRoleOwner(String keyword, int page, int size){
+        List<UserEntity> owners;
+        Page<UserEntity> pages;
+        if (keyword == null) {
+            pages = userRepository.findAllByRoles(Role.ROLE_OWNER, PageRequest.of(page, size));
+        } else {
+            pages = userRepository.findAllByRoles(Role.ROLE_OWNER, PageRequest.of(page, size));
         }
-        return ownersList;
+        owners = pages.getContent();
+        Map<String, Object> response = new HashMap<>();
+        response.put("owners", owners);
+        response.put("currentPage", pages.getNumber());
+        response.put("totalItems", pages.getTotalElements());
+        response.put("totalPages", pages.getTotalPages());
+        return response;
     }
+
 
     public Map<String, Object> findAllByKeyword(String keyword, int page, int size) {
         List<UserEntity> users;
@@ -102,14 +107,11 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-//    public UserEntity deleteUserRole(Long roleId, UserEntity user) {
-//        UserEntity foundUser = this.userRepository.findUserEntitiesById(user.getId());
-//        foundUser.getRoles().forEach(role -> {
-//            if (Objects.equals(role.getId(), roleId)) {
-//                user.getRoles().remove(role);
-//            }
-//        });
-//    }
+    public void deleteUserRole(Long roleId, Long userId) {
+        UserEntity foundUser = this.userRepository.findUserEntitiesById(userId);
+        Set<RoleEntity> roles = foundUser.getRoles();
+        roles.removeIf(role -> role.getId().equals(roleId));
+    }
 
     public UserEntity addEvent(Long userId, EventEntity event) {
         UserEntity user = this.userRepository.findUserEntitiesById(userId);

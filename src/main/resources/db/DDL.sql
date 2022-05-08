@@ -46,7 +46,7 @@ CREATE TABLE `user_role`
 CREATE TABLE `refresh_token`
 (
     `id`          bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `expiry_date` datetime(6)        NOT NULL,
+    `expiry_date` datetime        NOT NULL,
     `token`       varchar(255)       NOT NULL UNIQUE,
     `user_id`     bigint             NOT NULL,
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)

@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -129,9 +128,11 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/delete_role/{id}")
-//    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("id") Long roleId, @RequestBody UserEntity user) {
-//        this.userService.deleteUserRole(roleId, user);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @DeleteMapping("/delete_role/{role_id}/{user_id}")
+    public ResponseEntity<UserEntity> deleteUserRole(@PathVariable("role_id") Long roleId,
+                                                     @PathVariable("user_id") Long userId) {
+        this.userService.deleteUserRole(roleId, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
